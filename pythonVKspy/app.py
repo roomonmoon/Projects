@@ -9,7 +9,7 @@ def spy(token):
 
 def main():
     spy(token)
-    # всем привет с вами элез
+    # у меня очень большой хуй
 
 if __name__ == '__main__':
     main()

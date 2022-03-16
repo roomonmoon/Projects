@@ -1,1 +1,1 @@
-token = '1q2'
+token = '1q2w3e4t5'
