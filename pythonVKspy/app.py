@@ -9,7 +9,6 @@ def spy(token):
 
 def main():
     spy(token)
-    # у меня очень большой хуй
 
 if __name__ == '__main__':
     main()
