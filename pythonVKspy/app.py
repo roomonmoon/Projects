@@ -4,12 +4,11 @@ import json
 import time 
 import os  # not sure 
 
-def spy(token):
-    print(token)
+def spy():
+    print('TOKEN:', token)
 
 def main():
-    spy(token)
+    spy()
 
 if __name__ == '__main__':
     main()
-    print('LOVELOVE')
