@@ -12,7 +12,7 @@ def telegram_bot(BOT_TOKEN):
 
     @bot.message_handler(commands=["start"])
     def start_message(message):
-        bot.send_message(message.chat.id, "Ассаламу алейкум дракоонн, напиши 123 мне побрацки")
+        bot.send_message(message.chat.id, "Привет! Если хочешь видеть информацию, просто напиши мне что-нибудь :)")
 
     @bot.message_handler(content_types=["text"])
     def send_text(message):
