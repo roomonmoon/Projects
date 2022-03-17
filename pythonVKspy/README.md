@@ -2,3 +2,5 @@ If you will try to use this code you should create the file of name "auth_data.p
 ---
 For example:
 > token = 'ada2sda52312as65dgsd3asdbjcxzasd2312451sah'
+
+~ pip install requests wheel telebot pytelegrambotapi 

@@ -4,8 +4,6 @@ import telebot
 import requests
 import json
 import time
-import schedule
-
 
 def telegram_bot(BOT_TOKEN):
     bot = telebot.TeleBot(BOT_TOKEN)
