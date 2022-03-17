@@ -16,7 +16,6 @@ def telegram_bot(BOT_TOKEN):
 
     @bot.message_handler(content_types=["text"])
     def send_text(message):
-        while True:
             try: 
                 GetUsers = f'https://api.vk.com/method/users.get?user_id={user_id}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
                 reqGetUsers = requests.get(GetUsers)
@@ -53,7 +52,7 @@ def telegram_bot(BOT_TOKEN):
                 bot.send_message(message.chat.id, f"Имя пользователя: {fullname}\nID: {ID}\nПоследний раз был в сети: {lastseen}\nОбщее кол-во друзей: {friendsCount}\nПоследний друг: {fullnameLF}\nОбщее кол-во подписчиков: {followersCount}\nПоследний подписчик: {fullnameLastFollower}\n\nДанные на {datetime.now().strftime('%Y-%m-%d %H:%M')}")
             except Exception as ex:
                 bot.send_message(message.chat.id, "Что-то пошло не так!") 
-            time.sleep(15)
+                
     bot.polling()
 
 def main():
