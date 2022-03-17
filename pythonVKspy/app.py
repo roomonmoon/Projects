@@ -1,4 +1,4 @@
-from auth_data import TOKEN
+from auth_data import TOKEN, user_id
 from datetime import datetime
 import requests
 import json 
@@ -6,8 +6,8 @@ import os
 
 def spy():
     GetUsers = f'https://api.vk.com/method/users.get?user_id=498256285&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
-    GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_ids=498256285&access_token={TOKEN}&v=5.131'
-    GetFriends = f'https://api.vk.com/method/friends.get?users_ids=498256285&access_token={TOKEN}&v=5.131'
+    GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id=498256285&access_token={TOKEN}&v=5.131'
+    GetFriends = f'https://api.vk.com/method/friends.get?users_id=498256285&access_token={TOKEN}&v=5.131'
 
     req = requests.get(GetUsers) 
     req2 = requests.get(GetFriends) 
@@ -29,18 +29,38 @@ def spy():
     for i in data:
         name = i['first_name'] + ' ' + i['last_name']
         lastSeen = i['last_seen']['time']
-        followersCount = i['followers_count']
-        time = datetime.utcfromtimestamp(lastSeen).strftime('%Y-%m-%d %H:%M:%S')
-    
-    for i in data2["items"]: 
+        time = datetime.utcfromtimestamp(lastSeen + 10800).strftime('%Y-%m-%d %H:%M:%S')
+    print("Имя пользователя:", name, '\n' "Последний раз в сети:", time)
+
+    for i in data2['items']: 
         friends.append(i)
+        friendsCount = len(friends)
+    print("Кол-во друзей:",friendsCount)
+            
 
-    for i in data3["items"]:
+
+    for i in data3['items']:
         followers.append(i)
+        followersCount = len(followers)
+    if followersCount +- 1: 
+        nu = followers[0]
+    else:
+        print("Новых подписчиков нет!")
 
+    print("Кол-во подписчиков:", followersCount)
+    
+    # if followersCount > 70:
+    #     print(followers[0])
+    # else: 
+    # print("Его друзья:", friends)
+    # print("Его подписчики:", followers)
 
-def main():
-    spy()
+def newUser(nu):
+    print(nu)
+
+    def main():
+        spy()
+        newUser()
     
 
 if __name__ == '__main__':
