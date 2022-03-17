@@ -1,67 +1,63 @@
-from auth_data import TOKEN, user_id
+from auth_data import TOKEN, BOT_TOKEN, user_id
 from datetime import datetime
+import telebot
 import requests
-import json 
-import os 
-
-def spy():
-    GetUsers = f'https://api.vk.com/method/users.get?user_id=498256285&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
-    GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id=498256285&access_token={TOKEN}&v=5.131'
-    GetFriends = f'https://api.vk.com/method/friends.get?users_id=498256285&access_token={TOKEN}&v=5.131'
-
-    req = requests.get(GetUsers) 
-    req2 = requests.get(GetFriends) 
-    req3 = requests.get(GetFollowers)
-
-    src = req.json()
-    src2 = req2.json()
-    src3 = req3.json()
-
-    # Словари
-    data = src["response"]
-    data2 = src2["response"]
-    data3 = src3['response']
-
-    friends = []
-    followers = []
+import json
+import time
+import schedule
 
 
-    for i in data:
-        name = i['first_name'] + ' ' + i['last_name']
-        lastSeen = i['last_seen']['time']
-        time = datetime.utcfromtimestamp(lastSeen + 10800).strftime('%Y-%m-%d %H:%M:%S')
-    print("Имя пользователя:", name, '\n' "Последний раз в сети:", time)
+def telegram_bot(BOT_TOKEN):
+    bot = telebot.TeleBot(BOT_TOKEN)
 
-    for i in data2['items']: 
-        friends.append(i)
-        friendsCount = len(friends)
-    print("Кол-во друзей:",friendsCount)
-            
+    @bot.message_handler(commands=["start"])
+    def start_message(message):
+        bot.send_message(message.chat.id, "Ассаламу алейкум дракоонн, напиши 123 мне побрацки")
 
+    @bot.message_handler(content_types=["text"])
+    def send_text(message):
+        while True:
+            try: 
+                GetUsers = f'https://api.vk.com/method/users.get?user_id={user_id}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
+                reqGetUsers = requests.get(GetUsers)
+                srcGetUsers = reqGetUsers.json()
+                dataGetUsers = srcGetUsers["response"][0]
+                ID = dataGetUsers['id']
+                fullname = dataGetUsers['first_name'] + ' ' + dataGetUsers['last_name']
+                lastseen = datetime.utcfromtimestamp(dataGetUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
 
-    for i in data3['items']:
-        followers.append(i)
-        followersCount = len(followers)
-    if followersCount +- 1: 
-        nu = followers[0]
-    else:
-        print("Новых подписчиков нет!")
+                GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id={user_id}&access_token={TOKEN}&v=5.131'
+                reqGetFollowers = requests.get(GetFollowers)
+                srcGetFollowers = reqGetFollowers.json()
+                dataGetFollowers = srcGetFollowers["response"]
+                followersCount = dataGetFollowers['count']
+                followers = dataGetFollowers['items']
+                LastFollower = f'https://api.vk.com/method/users.get?user_id={followers[0]}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
+                requestForLastFollower = requests.get(LastFollower)
+                responseForLastFollower = requestForLastFollower.json()
+                dataForLastFollower = responseForLastFollower['response'][0]
+                fullnameLastFollower = dataForLastFollower['first_name'] + ' ' + dataForLastFollower['last_name']
 
-    print("Кол-во подписчиков:", followersCount)
-    
-    # if followersCount > 70:
-    #     print(followers[0])
-    # else: 
-    # print("Его друзья:", friends)
-    # print("Его подписчики:", followers)
+                GetFriends = f'https://api.vk.com/method/friends.get?user_id={user_id}&access_token={TOKEN}&v=5.131'
+                reqGetFriends = requests.get(GetFriends)
+                srcGetFriends = reqGetFriends.json()
+                dataGetFriends = srcGetFriends['response']
+                friendsCount = dataGetFriends['count']
+                friends = dataGetFriends['items']
+                LastFriend = f'https://api.vk.com/method/users.get?user_id={friends[0]}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
+                requestForLF = requests.get(LastFriend)
+                responseForLF = requestForLF.json()
+                dataForLF = responseForLF['response'][0]
+                fullnameLF = dataForLF['first_name'] + ' ' + dataForLF['last_name']
 
-def newUser(nu):
-    print(nu)
+                bot.send_message(message.chat.id, f"Имя пользователя: {fullname}\nID: {ID}\nПоследний раз был в сети: {lastseen}\nОбщее кол-во друзей: {friendsCount}\nПоследний друг: {fullnameLF}\nОбщее кол-во подписчиков: {followersCount}\nПоследний подписчик: {fullnameLastFollower}\n\nДанные на {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+            except Exception as ex:
+                bot.send_message(message.chat.id, "Что-то пошло не так!") 
+            time.sleep(15)
+    bot.polling()
 
-    def main():
-        spy()
-        newUser()
-    
+def main():
+    telegram_bot(BOT_TOKEN)
 
 if __name__ == '__main__':
     main()
