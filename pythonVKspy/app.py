@@ -14,8 +14,9 @@ def telegram_bot(BOT_TOKEN):
 
     @bot.message_handler(content_types=["text"])
     def send_text(message):
+        if  len(message.text) < 10 and message.text.isdigit():
             try: 
-                GetUsers = f'https://api.vk.com/method/users.get?user_id={user_id}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
+                GetUsers = f'https://api.vk.com/method/users.get?user_id={message.text}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
                 reqGetUsers = requests.get(GetUsers)
                 srcGetUsers = reqGetUsers.json()
                 dataGetUsers = srcGetUsers["response"][0]
@@ -23,7 +24,7 @@ def telegram_bot(BOT_TOKEN):
                 fullname = dataGetUsers['first_name'] + ' ' + dataGetUsers['last_name']
                 lastseen = datetime.utcfromtimestamp(dataGetUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
 
-                GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id={user_id}&access_token={TOKEN}&v=5.131'
+                GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id={message.text}&access_token={TOKEN}&v=5.131'
                 reqGetFollowers = requests.get(GetFollowers)
                 srcGetFollowers = reqGetFollowers.json()
                 dataGetFollowers = srcGetFollowers["response"]
@@ -35,7 +36,7 @@ def telegram_bot(BOT_TOKEN):
                 dataForLastFollower = responseForLastFollower['response'][0]
                 fullnameLastFollower = dataForLastFollower['first_name'] + ' ' + dataForLastFollower['last_name']
 
-                GetFriends = f'https://api.vk.com/method/friends.get?user_id={user_id}&access_token={TOKEN}&v=5.131'
+                GetFriends = f'https://api.vk.com/method/friends.get?user_id={message.text}&access_token={TOKEN}&v=5.131'
                 reqGetFriends = requests.get(GetFriends)
                 srcGetFriends = reqGetFriends.json()
                 dataGetFriends = srcGetFriends['response']
@@ -49,10 +50,10 @@ def telegram_bot(BOT_TOKEN):
 
                 bot.send_message(message.chat.id, f"Имя пользователя: {fullname}\nID: {ID}\nПоследний раз был в сети: {lastseen}\nОбщее кол-во друзей: {friendsCount}\nПоследний друг: {fullnameLF}\nОбщее кол-во подписчиков: {followersCount}\nПоследний подписчик: {fullnameLastFollower}\n\nДанные на {datetime.now().strftime('%Y-%m-%d %H:%M')}")
             except Exception as ex:
-                bot.send_message(message.chat.id, "Что-то пошло не так!") 
-                
+                bot.send_message(message.chat.id, "Что-то пошло не так!")
+        else:
+           bot.send_message(message.chat.id, "Неправильный ID!")
     bot.polling()
-
 def main():
     telegram_bot(BOT_TOKEN)
 
