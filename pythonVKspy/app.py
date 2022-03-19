@@ -24,17 +24,17 @@ def telegram_bot(BOT_TOKEN):
                 fullname = dataGetUsers['first_name'] + ' ' + dataGetUsers['last_name']
                 lastseen = datetime.utcfromtimestamp(dataGetUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
 
-                # GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id={message.text}&access_token={TOKEN}&v=5.131'
-                # reqGetFollowers = requests.get(GetFollowers)
-                # srcGetFollowers = reqGetFollowers.json()
-                # dataGetFollowers = srcGetFollowers["response"]
-                # followersCount = dataGetFollowers['count']
-                # followers = dataGetFollowers['items']
-                # LastFollower = f'https://api.vk.com/method/users.get?user_id={followers[0]}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
-                # requestForLastFollower = requests.get(LastFollower)
-                # responseForLastFollower = requestForLastFollower.json()
-                # dataForLastFollower = responseForLastFollower['response'][0]
-                # fullnameLastFollower = dataForLastFollower['first_name'] + ' ' + dataForLastFollower['last_name']
+                GetFollowers = f'https://api.vk.com/method/users.getFollowers?user_id={message.text}&access_token={TOKEN}&v=5.131'
+                reqGetFollowers = requests.get(GetFollowers)
+                srcGetFollowers = reqGetFollowers.json()
+                dataGetFollowers = srcGetFollowers["response"]
+                followersCount = dataGetFollowers['count']
+                followers = dataGetFollowers['items']
+                LastFollower = f'https://api.vk.com/method/users.get?user_id={followers[0]}&fields=last_seen,followers_count&access_token={TOKEN}&v=5.131'
+                requestForLastFollower = requests.get(LastFollower)
+                responseForLastFollower = requestForLastFollower.json()
+                dataForLastFollower = responseForLastFollower['response'][0]
+                fullnameLastFollower = dataForLastFollower['first_name'] + ' ' + dataForLastFollower['last_name']
 
                 GetFriends = f'https://api.vk.com/method/friends.get?user_id={message.text}&access_token={TOKEN}&v=5.131'
                 reqGetFriends = requests.get(GetFriends)
