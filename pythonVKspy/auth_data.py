@@ -1,5 +1,4 @@
-access_url = 'https://oauth.vk.com/authorize?client_id=8104338&display=page&scope=users&friends&offline&response_type=token&v=5.131&state=123456'
-TOKEN = '18f5e2334542f90d29f8ead2d4d290b1bc569e4a5c192948f5767779bb131706b342d95e7fc1070eea3f6'
+TOKEN = 'a04f70bfa04f70bfa04f70bfd4a034d92daa04fa04f70bfc27e781afea65009cc255cea'
 BOT_TOKEN = '5213597366:AAGzOX_-UkaL9bEqzgYHlQuM3LMLiTfLTBE'
 user_id = '498256285'
 second_id = '461232958'
