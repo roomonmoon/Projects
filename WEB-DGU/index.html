@@ -7,20 +7,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEB-территория ДГУ</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/WEB-DGU/images/icon-университет.png" type="image/x-icon">
 </head>
 
 <body>
-    <div class="page">
-        <div class="container">
-            <form action="#">
-                <h1>Регистрация</h1>
-                <input type="text" >
+    <div class="main_block">
+        <!-- Блок регистрации -->
+        <div class="registration_block">
+            <form method="get" action="" class="validate-form">
+                <h2>Регистрация</h2>
+                <div class="double_row">
+                    <label for="first">курс</label>
+                    <input class="first" name="example_number" required="required" type="number" />
+                    <label for="first">группа</label>
+                    <input сlass="second" type="text" required="required" />
+                </div>
+                <p>
+                    <input type="number" name="login" required="required" placeholder="№ зачетной книжки">
+                </p>
+                <p>
+                    <input type="text" required="required" placeholder="Фамилия">
+                </p>
+                <p>
+                    <input type="text" required="required" placeholder="Имя">
+                </p>
+                <p>
+                    <input type="text" required="required" placeholder="Отчество">
+                </p>
+                <p>
+                    <input type="text" name="email" required="required" placeholder="Почта">
+                </p>
+                <p>
+                    <input type="password" name="password" required="required" placeholder="Пароль">
+                </p>
+                <button type="submit" class="button2">Подтвердить</button>
             </form>
-
-            <form action="#">
-
+        </div>
+        <!-- Блок входа -->
+        <div class="login_block">
+            <form method="post" action="" class="login">
+                <h2>Вход</h2>
+                <p>
+                    <input type="number" name="login" required="required" placeholder="№ зачетной книжки">
+                </p>
+                <p>
+                    <input type="password" name="password" required="required" placeholder="Пароль">
+                </p>
+                <!-- ПАНЕЛЬ СОЦСЕТЕЙ -->
+                <ul class="social-icons">
+                    <li>
+                        <a class="social-icon-twitter" href="#" title="..." target="_blank" rel="noopener"></a>
+                    </li>
+                    <li>
+                        <a class="social-icon-fb" href="#" title="..." target="_blank" rel="noopener"></a>
+                    </li>
+                    <li>
+                        <a class="social-icon-vk" href="#" title="..." target="_blank" rel="noopener"></a>
+                    </li>
+                    <li>
+                        <a class="social-icon-telegram" href="#" title="..." target="_blank" rel="noopener"></a>
+                    </li>
+                    <li>
+                        <a class="social-icon-youtube" href="#" title="..." target="_blank" rel="noopener"></a>
+                    </li>
+                </ul>
+                <div id="buttonlog">
+                    <button type="submit" class="buttonlog"></button>
+                </div>
             </form>
-            <!-- <img src="images/logo_left_part.png" alt=""> -->
         </div>
     </div>
 </body>
