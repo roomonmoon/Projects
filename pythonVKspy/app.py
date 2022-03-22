@@ -4,6 +4,7 @@ import telebot
 import vk_api
 import requests
 import json
+import time
 
 vk_session = vk_api.VkApi(f'{login}', f'{password}')
 vk_session.auth()
@@ -19,9 +20,8 @@ def telegram_bot(bot_token):
 
     @bot.message_handler(content_types=["text"])
     def send_text(message):
-        if len(message.text) < 10 and message.text.isdigit():
-            messageID = message.text
-            try:
+        try: 
+            while True: 
                 getUsers = vk.users.get(user_id=f"{messageID}", fields='last_seen,followers_count,photo_200_orig',)[0]
                 userID = getUsers['id']
                 userPhoto = getUsers['photo_200_orig']
@@ -29,26 +29,40 @@ def telegram_bot(bot_token):
                 lastseen = datetime.utcfromtimestamp(getUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
 
                 GetFollowers = vk.users.getFollowers(user_id=f"{messageID}")
-                followersCount = GetFollowers['count']
                 followers = GetFollowers['items']
-                LastFollower = vk.users.get(user_id=f"{followers[0]}", fields='id, first_name, last_name')[0]
-                IDLastFollower = followers[0]
-                fullnameLastFollower = LastFollower['first_name'] + ' ' + LastFollower['last_name']
 
                 GetFriends = vk.friends.get(user_id=f"{messageID}")
-                friendsCount = GetFriends['count']
                 friends = GetFriends['items']
-                LastFriend = vk.users.get(user_id=f"{friends[0]}", fields='id, first_name, last_name')[0]
-                IDLastFriend = LastFriend['id']
-                fullnameLF = LastFriend['first_name'] + ' ' + LastFriend['last_name']
+
+                time.sleep(5400)
+
+                GetFollowers2 = vk.users.getFollowers(user_id=f"{messageID}")
+                followersCount = GetFollowers2['count']
+                NewFollower = list(set(GetFollowers2['items']) - set(GetFollowers['items']))
+                def newfollower():
+                    if NewFollower != []:
+                        NewFollowerGet = vk.users.get(user_id=f"{NewFollower[0]}")[0]
+                        NewFollowerName = NewFollowerGet['first_name'] + ' ' + NewFollowerGet['last_name']
+                        return NewFollowerName
+                    else:
+                        return "Новых подписчиков нет"
+
+                GetFriends2 = vk.friends.get(user_id=f"{messageID}")
+                friendsCount = GetFriends2['count']
+                NewFriend = list(set(GetFriends2['items']) - set(GetFriends['items']))
+                def newfriend():
+                    if NewFriend != []:
+                        NewFriendGet = vk.users.get(user_id=f"{NewFriend[0]}")[0]
+                        NewFriendName = NewFriendGet['first_name'] + ' ' + NewFriendGet['last_name']
+                        return NewFriendName
+                    else:
+                        return "Новых друзей нет"
 
                 bot.send_message(message.chat.id, 
-f"ID пользователя: {userID}\nИмя пользователя: {fullname}\nПоследний раз в сети: {lastseen}\n\nОбщее кол-во друзей: {friendsCount}\nОбщее кол-во подписчиков: {followersCount}\n\nПоследний друг: {fullnameLF}\nПоследний подписчик: {fullnameLastFollower}\n{userPhoto}"
-                )       
-            except Exception as ex: 
-                bot.send_message(message.chat.id, "Что-то пошло не так!")
-        else:
-            bot.send_message(message.chat.id, "Невалидный ID!")
+f"ID пользователя: {userID}\nИмя пользователя: {fullname}\nПоследний раз в сети: {lastseen}\n\nОбщее кол-во друзей: {friendsCount}\nОбщее кол-во подписчиков: {followersCount}\n\nНовый подписчик: {newfollower()}\nНовый друг: {newfriend()}\n\n\n{userPhoto}") 
+        except Exception as ex: 
+            bot.send_message(message.chat.id, "Что-то пошло не так!")
+
     bot.polling()
 
 def main():
@@ -56,5 +70,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
