@@ -22,6 +22,7 @@ def telegram_bot(bot_token):
     def send_text(message):
         try: 
             while True: 
+                messageID = '123456789'
                 getUsers = vk.users.get(user_id=f"{messageID}", fields='last_seen,followers_count,photo_200_orig',)[0]
                 userID = getUsers['id']
                 userPhoto = getUsers['photo_200_orig']
@@ -34,7 +35,7 @@ def telegram_bot(bot_token):
                 GetFriends = vk.friends.get(user_id=f"{messageID}")
                 friends = GetFriends['items']
 
-                time.sleep(5400)
+                time.sleep(10)
 
                 GetFollowers2 = vk.users.getFollowers(user_id=f"{messageID}")
                 followersCount = GetFollowers2['count']
