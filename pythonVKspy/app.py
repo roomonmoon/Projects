@@ -21,13 +21,8 @@ def telegram_bot(bot_token):
     @bot.message_handler(content_types=["text"])
     def send_text(message):
         try: 
-            while True: 
-                messageID = '123456789'
-                getUsers = vk.users.get(user_id=f"{messageID}", fields='last_seen,followers_count,photo_200_orig',)[0]
-                userID = getUsers['id']
-                userPhoto = getUsers['photo_200_orig']
-                fullname = getUsers['first_name'] + ' ' + getUsers['last_name']
-                lastseen = datetime.utcfromtimestamp(getUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
+            while True:
+                messageID = 'ID'
 
                 GetFollowers = vk.users.getFollowers(user_id=f"{messageID}")
                 followers = GetFollowers['items']
@@ -36,6 +31,12 @@ def telegram_bot(bot_token):
                 friends = GetFriends['items']
 
                 time.sleep(10)
+
+                getUsers = vk.users.get(user_id=f"{messageID}", fields='last_seen,followers_count,photo_200_orig',)[0]
+                userID = getUsers['id']
+                userPhoto = getUsers['photo_200_orig']
+                fullname = getUsers['first_name'] + ' ' + getUsers['last_name']
+                lastseen = datetime.utcfromtimestamp(getUsers['last_seen']['time'] + 10800).strftime('%Y-%m-%d %H:%M')
 
                 GetFollowers2 = vk.users.getFollowers(user_id=f"{messageID}")
                 followersCount = GetFollowers2['count']
@@ -46,7 +47,7 @@ def telegram_bot(bot_token):
                         NewFollowerName = NewFollowerGet['first_name'] + ' ' + NewFollowerGet['last_name']
                         return NewFollowerName
                     else:
-                        return "Новых подписчиков нет"
+                        return "-"
 
                 GetFriends2 = vk.friends.get(user_id=f"{messageID}")
                 friendsCount = GetFriends2['count']
@@ -57,7 +58,7 @@ def telegram_bot(bot_token):
                         NewFriendName = NewFriendGet['first_name'] + ' ' + NewFriendGet['last_name']
                         return NewFriendName
                     else:
-                        return "Новых друзей нет"
+                        return "-"
 
                 bot.send_message(message.chat.id, 
 f"ID пользователя: {userID}\nИмя пользователя: {fullname}\nПоследний раз в сети: {lastseen}\n\nОбщее кол-во друзей: {friendsCount}\nОбщее кол-во подписчиков: {followersCount}\n\nНовый подписчик: {newfollower()}\nНовый друг: {newfriend()}\n\n\n{userPhoto}") 
