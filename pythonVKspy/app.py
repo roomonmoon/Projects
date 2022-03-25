@@ -1,15 +1,10 @@
-from auth_data import login, password, bot_token
+from auth_data import login, password, bot_token, messageID
 from datetime import datetime
 import telebot
 import vk_api
 import requests
 import json
 import time
-
-vk_session = vk_api.VkApi(f'{login}', f'{password}')
-vk_session.auth()
-
-vk = vk_session.get_api()
 
 def telegram_bot(bot_token):
     bot = telebot.TeleBot(bot_token)
@@ -22,7 +17,9 @@ def telegram_bot(bot_token):
     def send_text(message):
         try: 
             while True:
-                messageID = 'ID'
+                vk_session = vk_api.VkApi(login, password)
+                vk_session.auth()
+                vk = vk_session.get_api()
 
                 GetFollowers = vk.users.getFollowers(user_id=f"{messageID}")
                 followers = GetFollowers['items']
@@ -69,6 +66,6 @@ f"ID пользователя: {userID}\nИмя пользователя: {fulln
 
 def main():
     telegram_bot(bot_token)
-
+    
 if __name__ == '__main__':
     main()
