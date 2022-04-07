@@ -31,6 +31,6 @@
     $mysql->query("INSERT INTO `users` (`login`, `name`, `lastname`, `middlename`, `speciality`, `place`, `pass`)
     VALUES('$login', '$name', '$lastname', '$middlename', '$speciality', '$place', '$pass')");
 
-    $mysql->close()
-    header('Location: /')
+    $mysql->close();
+    header('Location: /');
 ?>
