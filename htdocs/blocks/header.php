@@ -7,17 +7,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="#">Главная</span></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#">Педагоги</a>
+                  <a class="nav-link" href="../педагоги/">Педагоги</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Библиотека</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Личный кабинет</a>
+                  <a class="nav-link" href="../кабинет/">Личный кабинет</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Помощь</span></a>

@@ -137,7 +137,8 @@ dfn {
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 small {
@@ -5190,7 +5191,7 @@ tbody.collapse.show {
 .list-group-item {
   position: relative;
   display: block;
-  padding: 0.75rem 1.25rem;
+  padding: 0.3rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -5208,7 +5209,7 @@ tbody.collapse.show {
 }
 
 .list-group-item:hover, .list-group-item:focus {
-  z-index: 1;
+  z-index: 0;
   text-decoration: none;
 }
 
