@@ -1,30 +1,35 @@
 <?php 
-    $email = filter_var(trim($_POST['email']), 
-    FILTER_SANITIZE_STRING);
-    $login = filter_var(trim($_POST['login']), 
-    FILTER_SANITIZE_STRING);
-    $name = filter_var(trim($_POST['name']), 
-    FILTER_SANITIZE_STRING);
-    $lastname = filter_var(trim($_POST['lastname']), 
-    FILTER_SANITIZE_STRING);
-    $middlename = filter_var(trim($_POST['middlename']), 
-    FILTER_SANITIZE_STRING);
-    $place_born = filter_var(trim($_POST['place_born']), 
-    FILTER_SANITIZE_STRING);
-    $speciality = filter_var(trim($_POST['speciality']), 
-    FILTER_SANITIZE_STRING);
-    $place_work = filter_var(trim($_POST['place_work']), 
-    FILTER_SANITIZE_STRING);
-    $general_experience = filter_var(trim($_POST['general_experience']), 
-    FILTER_SANITIZE_STRING);
-    $teacher_experience = filter_var(trim($_POST['teacher_experience']), 
-    FILTER_SANITIZE_STRING);
-    $qualification_category = filter_var(trim($_POST['qualification_category']), 
-    FILTER_SANITIZE_STRING);
-    $pass = filter_var(trim($_POST['pass']), 
-    FILTER_SANITIZE_STRING);
-    $repass = filter_var(trim($_POST['repass']), 
-    FILTER_SANITIZE_STRING);
+session_start();
+require "../config.php";
+include "../blocks/header.php";
+include "../blocks/underheader.php";
+
+$email = filter_var(trim($_POST['email']), 
+FILTER_SANITIZE_STRING);
+$login = filter_var(trim($_POST['login']), 
+FILTER_SANITIZE_STRING);
+$name = filter_var(trim($_POST['name']), 
+FILTER_SANITIZE_STRING);
+$lastname = filter_var(trim($_POST['lastname']), 
+FILTER_SANITIZE_STRING);
+$middlename = filter_var(trim($_POST['middlename']), 
+FILTER_SANITIZE_STRING);
+$place_born = filter_var(trim($_POST['place_born']), 
+FILTER_SANITIZE_STRING);
+$speciality = filter_var(trim($_POST['speciality']), 
+FILTER_SANITIZE_STRING);
+$place_work = filter_var(trim($_POST['place_work']), 
+FILTER_SANITIZE_STRING);
+$general_experience = filter_var(trim($_POST['general_experience']), 
+FILTER_SANITIZE_STRING);
+$teacher_experience = filter_var(trim($_POST['teacher_experience']), 
+FILTER_SANITIZE_STRING);
+$qualification_category = filter_var(trim($_POST['qualification_category']), 
+FILTER_SANITIZE_STRING);
+$pass = filter_var(trim($_POST['pass']), 
+FILTER_SANITIZE_STRING);
+$repass = filter_var(trim($_POST['repass']), 
+FILTER_SANITIZE_STRING);
     
 
     
@@ -55,5 +60,5 @@
     VALUES('$email', '$login', '$name', '$lastname', '$middlename', '$place_born', '$speciality', '$place_work', '$general_experience', '$teacher_experience', '$qualification_category', '$pass', '$avatar')");
 
     $mysql->close();
-    header('Location: /педагоги/');
+    header('Location: /modules/teachers.php');
 ?>

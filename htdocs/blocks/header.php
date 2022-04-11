@@ -11,13 +11,13 @@
                 <a class="nav-link" href="#">Главная</span></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="../педагоги/">Педагоги</a>
+                  <a class="nav-link" href="../modules/teachers.php">Педагоги</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Библиотека</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../кабинет/">Личный кабинет</a>
+                  <a class="nav-link" href="../modules/user.php?id=<?php print $_SESSION['id']?>">Личный кабинет</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Помощь</span></a>
