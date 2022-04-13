@@ -17,7 +17,7 @@ include "../blocks/underheader.php";
         <div class="col"><br>
             <h5 class="text-uppercase text-center pt-15 text-muted">ПОИСК ПЕДАГОГОВ: <?php echo $people[0]?> ЧЕЛОВЕК</h5><br>
             <div class="input-group rounded m-auto w-25">
-                <input type="search" class="form-control rounded" placeholder="Введите имя для поиска ..." aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" class="form-control rounded" id="search" placeholder="Введите имя для поиска ..." aria-label="Search" aria-describedby="search-addon" />
                 <button type="button" class="btn btn-outline-primary">Поиск</button>
             </div><br>
         </div>
@@ -46,3 +46,10 @@ include "../blocks/underheader.php";
             </tbody>
         </table>
     </div>
+    <script src="../js/search.js"></script>
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>

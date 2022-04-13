@@ -16,12 +16,12 @@
     }
     else
     {
-        if(isset($_POST['sub']))
+        if(isset($_POST['submit']))
         {
-            $login=$_POST['login'];
+            $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
             $pass = $_POST['pass'];
 
-            $query1 = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `pass` = '$pass'");
+            $query1 = mysqli_query($db, "SELECT * FROM `users` WHERE `email` = '$email' AND `pass` = '$pass'");
 
             if(mysqli_num_rows($query1)>0) 
             {
@@ -32,7 +32,7 @@
                 $_SESSION['id'] = $id;
                 $_SESSION['name'] = $name;
 
-                header("Location:".$siteurl);
+                header("Location:/modules/user.php?id=".$_SESSION['id']);
             }
             else
             {
@@ -46,10 +46,10 @@
                 <div class="col">
                     <h1>Форма авторизации</h1><br>
                         <form method="post">
-                            <input type="text" class="form-control" name="login" id="login" placeholder="Введите логин"><br>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Введите email"><br>
                             <input type="text" class="form-control" name="pass" id="pass" placeholder="Введите пароль"><br>
-                            <button class="btn btn-success" type="submit" name="sub">Авторизоваться</button>
-                            <button class="btn float-right" type="button" onclick="document.location='/modules/check.php'">Зарегестрироваться</button>
+                            <button class="btn btn-success" type="submit" name="submit">Авторизоваться</button>
+                            <a class="btn float-right button" href="../blocks/form-auth.php">Зарегестрироваться</a>
                         </form>
                 </div> 
          <?php

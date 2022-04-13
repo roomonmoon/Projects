@@ -55,3 +55,40 @@ a {
     font-size: 14px;
     margin-left: 10px;
 }
+
+.tabs-header {
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+    border-left: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    margin-top: 10px;
+    border-top: none;
+    width: 254.5px;
+}
+.tab-h {
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #555;
+}
+.tab-h i {
+    padding: 0 10px 0 10px;
+}
+.tab-h:hover {
+    background-color: #eaeaea;
+    color: black;
+}
+
+.content-body {
+    padding: 20px;
+    background: #f7f7f7;
+}
+.content-info {
+    background: #fff;
+    position: relative;
+    padding: 15px 10px 5px 15px;
+}
+
+.hide {
+    display: none;
+}
