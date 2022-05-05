@@ -14,7 +14,7 @@
                   <a class="nav-link" href="../modules/teachers.php">Педагоги</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Библиотека</a>
+                  <a class="nav-link" href="../modules/library.php">Библиотека</a>
                 </li>
                 <?php 
                 if (isset($_SESSION['id'])) {
